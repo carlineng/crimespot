@@ -1,1 +1,10 @@
 Taking a peek at the CrimeSpotting API
+
+TODO:
+getElevation(latitude, longitude) -> elevation in meters
+
+define neighborhood boundaries in terms of lat/long
+
+Plot elevation vs. crime rate
+   - by crime type
+   - by neighborhood
