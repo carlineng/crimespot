@@ -57,10 +57,28 @@ class CrimeSpottingApi:
             params.append(str(key) + '=' + str(val))
 
         query = query + '&'.join(params)
-
-        getRequest = urllib2.urlopen(query)
-        rawData = getRequest.read()
-        getRequest.close()
+        rawData = self.makeRequest(query)
 
         output = rawData.strip().split('\n')
         return output
+
+    def getCrimeOnDate(self, date, **kwargs):
+        query = self.root
+        dateTimeStart = 'dtstart=' + date + 'T00:00:00-0700'
+        dateTimeEnd = 'dtend=' + date + 'T23:59:59-0700'
+        params = ['format=csv',dateTimeStart, dateTimeEnd]
+
+        for key, val in kwargs.iteritems():
+            params.append(str(key) + '=' + str(val))
+
+        query = query + '&'.join(params)
+        rawData = self.makeRequest(query)
+
+        output = rawData.strip().split('\n')
+        return output
+
+    def makeRequest(self, query):
+        getRequest = urllib2.urlopen(query)
+        rawData = getRequest.read()
+        getRequest.close()
+        return rawData
