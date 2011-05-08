@@ -1,6 +1,6 @@
 #!/usr/bin/env R
 
-setwd('/Volumes/hobo/githobo/crimespot/src')
+setwd('/Volumes/hobo/githobo/crimespot/src/R')
 
 sfPrefix = 'http://sanfrancisco'
 oakPrefix = 'http://oakland'
@@ -21,12 +21,10 @@ getCsv <- function(...) {
         argVal = argList[[i]]
         argName = argNames[i]
         arg = paste(argName, argVal, sep="=")
-        print(arg)
         paramList = paste(paramList, arg, sep="&")
     }
     
     query = paste(query, paramList, sep="")
-    print(query)
     result = read.csv(query)
     return(result)
 }
@@ -36,4 +34,3 @@ getCrimeOnDate <- function(dait, ...) {
     dateTimeEnd = paste(dait, 'T23:59:59-0700', sep="")
     return(getCsv(dtstart=dateTimeStart, dtend=dateTimeEnd, ...))
 }
-
